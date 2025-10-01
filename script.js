@@ -2,7 +2,7 @@ const button = document.getElementById("runButton");
 const resultDiv = document.getElementById("result");
 
 button.addEventListener("click", () => {
-  const inputArray = prompt("Enter array elements separated by commas (e.g. 1, 3, 4, 6):");
+  const inputArray = prompt("Enter array elements separated by commas (e.g. 1, l, yu, 222, \\, 2):");
   if (inputArray === null || inputArray.trim() === "") {
     resultDiv.style.display = "inline-block";
     resultDiv.innerText = "⚠️ You must enter an array!";
@@ -11,24 +11,24 @@ button.addEventListener("click", () => {
 
   const array = inputArray.split(",").map(item => item.trim());
 
-  const inputItem = prompt("Enter the element to remove:");
-  if (inputItem === null || inputItem.trim() === "") {
+  const inputItems = prompt("Enter elements to remove, separated by commas (e.g. y, \\):");
+  if (inputItems === null || inputItems.trim() === "") {
     resultDiv.style.display = "inline-block";
-    resultDiv.innerText = "⚠️ You must enter an element to remove!";
+    resultDiv.innerText = "⚠️ You must enter elements to remove!";
     return;
   }
 
-  const itemToRemove = inputItem.trim();
+  const itemsToRemove = inputItems.split(",").map(item => item.trim());
 
-  function removeElement(arr, item) {
+  function removeElements(arr, items) {
     for (let i = arr.length - 1; i >= 0; i--) {
-      if (arr[i] === item) {
+      if (items.includes(arr[i])) {
         arr.splice(i, 1);
       }
     }
   }
 
-  removeElement(array, itemToRemove);
+  removeElements(array, itemsToRemove);
 
   resultDiv.style.display = "inline-block";
   resultDiv.innerText = "Resulting array: [" + array.join(", ") + "]";
